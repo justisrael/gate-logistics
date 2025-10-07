@@ -1,0 +1,68 @@
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Logs & debugging
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+debug.log
+error.log
+stacktrace.log
+
+# OS & IDE-specific files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.bak
+
+# Build & Generated files
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Prisma & Database files
+prisma/migrations/
+prisma/dev.db
+prisma/dev.db-journal
+
+# Cache files
+.cache/
+.nyc_output/
+.next/
+.out/
+.sass-cache/
+.parcel-cache/
+jest/
+jest-cache/
+jest.config.js
+coverage/
+tivesmynameAppDataRoamingnpm-cache
+
+# Docker files
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# Firebase, AWS, and cloud-related
+.firebase/
+functions/node_modules/
+storage/
+.firebaserc

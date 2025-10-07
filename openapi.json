@@ -1,0 +1,4824 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Coconut API",
+    "version": "1.0.0",
+    "description": "API documentation for the Coconut application"
+  },
+  "components": {
+    "schemas": {
+      "RegisterUser": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "phone"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "businessName": {
+            "type": "string",
+            "example": "Doe Enterprises"
+          },
+          "isBusinessRegistered": {
+            "type": "boolean",
+            "example": true
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1234567890"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "user@example.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "example": "SecureP@ss123"
+          }
+        }
+      },
+      "LoginUser": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "user@example.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "example": "SecureP@ss123"
+          }
+        }
+      },
+      "ForgotPasswordRequest": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "user@example.com"
+          }
+        }
+      },
+      "ResetPasswordRequest": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@example.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "example": "NewStrongP@ss123"
+          }
+        }
+      },
+      "RegisterBusiness": {
+        "type": "object",
+        "required": [
+          "businessName",
+          "businessLogo",
+          "isRegistered",
+          "businessCategory",
+          "country",
+          "businessType",
+          "primaryEmail"
+        ],
+        "properties": {
+          "businessName": {
+            "type": "string",
+            "minLength": 2,
+            "example": "Tech Corp"
+          },
+          "businessLogo": {
+            "type": "string",
+            "format": "url",
+            "example": "https://example.com/logo.png"
+          },
+          "isRegistered": {
+            "type": "boolean",
+            "example": true
+          },
+          "businessCategory": {
+            "type": "string",
+            "minLength": 2,
+            "example": "Technology"
+          },
+          "country": {
+            "type": "string",
+            "minLength": 2,
+            "example": "Ghana"
+          },
+          "businessType": {
+            "type": "string",
+            "enum": [
+              "Merchants",
+              "Corporates",
+              "Agents"
+            ],
+            "example": "Merchants"
+          },
+          "primaryEmail": {
+            "type": "string",
+            "format": "email",
+            "example": "contact@techcorp.com"
+          }
+        }
+      },
+      "UpdateBusiness": {
+        "type": "object",
+        "properties": {
+          "businessName": {
+            "type": "string",
+            "minLength": 2,
+            "example": "Updated Tech Corp"
+          },
+          "businessLogo": {
+            "type": "string",
+            "format": "url",
+            "example": "https://example.com/new-logo.png"
+          },
+          "isRegistered": {
+            "type": "boolean",
+            "example": true
+          },
+          "businessCategory": {
+            "type": "string",
+            "minLength": 2,
+            "example": "Updated Technology"
+          },
+          "country": {
+            "type": "string",
+            "minLength": 2,
+            "example": "Nigeria"
+          },
+          "businessType": {
+            "type": "string",
+            "enum": [
+              "small",
+              "medium",
+              "large"
+            ],
+            "example": "medium"
+          },
+          "primaryEmail": {
+            "type": "string",
+            "format": "email",
+            "example": "updated@techcorp.com"
+          }
+        }
+      },
+      "BusinessIdParam": {
+        "type": "object",
+        "properties": {
+          "businessId": {
+            "type": "string",
+            "minLength": 24,
+            "maxLength": 24,
+            "example": "60f5b49f1c4ae94b9c4e7c12"
+          }
+        }
+      },
+      "AccessRequest": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "phone",
+          "businessName",
+          "businessCategory",
+          "country",
+          "city",
+          "needs"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "user@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1234567890"
+          },
+          "businessName": {
+            "type": "string",
+            "example": "Doe Enterprises"
+          },
+          "businessCategory": {
+            "type": "string",
+            "example": "Tech"
+          },
+          "country": {
+            "type": "string",
+            "example": "USA"
+          },
+          "city": {
+            "type": "string",
+            "example": "New York"
+          },
+          "needs": {
+            "type": "string",
+            "example": "Looking for private access"
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "street": {
+            "type": "string",
+            "example": "123 Main St"
+          },
+          "city": {
+            "type": "string",
+            "example": "New York"
+          },
+          "state": {
+            "type": "string",
+            "example": "NY"
+          },
+          "postalCode": {
+            "type": "string",
+            "example": "10001"
+          },
+          "country": {
+            "type": "string",
+            "example": "USA"
+          }
+        },
+        "required": [
+          "name",
+          "street",
+          "city",
+          "state",
+          "postalCode",
+          "country"
+        ]
+      },
+      "Parcel": {
+        "type": "object",
+        "properties": {
+          "length": {
+            "type": "number",
+            "example": 10
+          },
+          "width": {
+            "type": "number",
+            "example": 5
+          },
+          "height": {
+            "type": "number",
+            "example": 8
+          },
+          "weight": {
+            "type": "number",
+            "example": 2
+          }
+        },
+        "required": [
+          "length",
+          "width",
+          "height",
+          "weight"
+        ]
+      },
+      "Package": {
+        "type": "object",
+        "properties": {
+          "parcel": {
+            "$ref": "#/components/schemas/Parcel"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "item1",
+              "item2"
+            ]
+          }
+        },
+        "required": [
+          "parcel",
+          "items"
+        ]
+      },
+      "ShippingRateRequest": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "to": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "package": {
+            "$ref": "#/components/schemas/Package"
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "package"
+        ]
+      },
+      "AdminRegisterRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password",
+          "role"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Full name of the admin",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of the admin",
+            "example": "john.doe@example.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password for the admin account",
+            "example": "Password123!"
+          },
+          "role": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Roles assigned to the admin",
+            "example": [
+              "super_admin",
+              "moderator"
+            ]
+          }
+        }
+      },
+      "AdminRegisterResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indicates if the registration was successful",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message",
+            "example": "Admin registered successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "adminId": {
+                "type": "string",
+                "description": "Unique identifier for the admin",
+                "example": "admin_123"
+              },
+              "email": {
+                "type": "string",
+                "description": "Email address of the admin",
+                "example": "john.doe@example.com"
+              }
+            }
+          }
+        }
+      },
+      "AdminLoginRequest": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email address of the admin",
+            "example": "john.doe@example.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password for the admin account",
+            "example": "Password123!"
+          }
+        }
+      },
+      "AdminLoginResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indicates if the login was successful",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message",
+            "example": "Login successful"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "access_token": {
+                "type": "string",
+                "description": "JWT token for authentication",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+              }
+            }
+          }
+        }
+      },
+      "Admin": {
+        "type": "object",
+        "properties": {
+          "adminId": {
+            "type": "string",
+            "description": "Unique identifier for the admin",
+            "example": "admin_123"
+          },
+          "name": {
+            "type": "string",
+            "description": "Full name of the admin",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of the admin",
+            "example": "john.doe@example.com"
+          },
+          "role": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Roles assigned to the admin",
+            "example": [
+              "super_admin",
+              "moderator"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the admin was created",
+            "example": "2025-05-19T15:37:00Z"
+          }
+        }
+      },
+      "AdminListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indicates if the request was successful",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message",
+            "example": "Admins retrieved successfully"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Admin"
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "description": "HTTP status code"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          }
+        }
+      },
+      "BusinessNames": {
+        "type": "object",
+        "required": [
+          "type",
+          "name1",
+          "phone",
+          "Klas",
+          "businessNature"
+        ],
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "name1": {
+            "type": "string"
+          },
+          "name2": {
+            "type": "string"
+          },
+          "name3": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "businessNature": {
+            "type": "string"
+          }
+        }
+      },
+      "Director": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "dateOfBirth",
+          "gender",
+          "nationality",
+          "phone",
+          "email",
+          "occupation",
+          "address",
+          "nin",
+          "identification",
+          "passport",
+          "signature"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "otherName": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "other"
+            ]
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "occupation": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "nin": {
+            "type": "string"
+          },
+          "identification": {
+            "type": "string"
+          },
+          "passport": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          }
+        }
+      },
+      "Witness": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "dateOfBirth",
+          "gender",
+          "nationality",
+          "phone",
+          "email",
+          "occupation",
+          "address"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "otherName": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "other"
+            ]
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "occupation": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "witnessSignature": {
+            "type": "string"
+          }
+        }
+      },
+      "RegistrationForm": {
+        "type": "object",
+        "required": [
+          "businessId",
+          "details",
+          "txId",
+          "status",
+          "document"
+        ],
+        "properties": {
+          "businessId": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "properties": {
+              "businessNames": {
+                "$ref": "#/components/schemas/BusinessNames"
+              },
+              "director": {
+                "$ref": "#/components/schemas/Director"
+              },
+              "witness": {
+                "$ref": "#/components/schemas/Witness"
+              }
+            }
+          },
+          "txId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ]
+          },
+          "document": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CreateRegistrationDto": {
+        "type": "object",
+        "required": [
+          "businessId",
+          "details",
+          "txId",
+          "document"
+        ],
+        "properties": {
+          "businessId": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "required": [
+              "businessNames",
+              "director",
+              "witness"
+            ],
+            "properties": {
+              "businessNames": {
+                "$ref": "#/components/schemas/BusinessNames"
+              },
+              "director": {
+                "$ref": "#/components/schemas/Director"
+              },
+              "witness": {
+                "$ref": "#/components/schemas/Witness"
+              }
+            }
+          },
+          "txId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ]
+          },
+          "document": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateRegistrationDto": {
+        "type": "object",
+        "properties": {
+          "details": {
+            "type": "object",
+            "properties": {
+              "businessNames": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "name1": {
+                    "type": "string"
+                  },
+                  "name2": {
+                    "type": "string"
+                  },
+                  "name3": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "businessNature": {
+                    "type": "string"
+                  }
+                }
+              },
+              "director": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "otherName": {
+                    "type": "string"
+                  },
+                  "dateOfBirth": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "gender": {
+                    "type": "string",
+                    "enum": [
+                      "male",
+                      "female",
+                      "other"
+                    ]
+                  },
+                  "nationality": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "occupation": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "nin": {
+                    "type": "string"
+                  },
+                  "identification": {
+                    "type": "string"
+                  },
+                  "passport": {
+                    "type": "string"
+                  },
+                  "signature": {
+                    "type": "string"
+                  }
+                }
+              },
+              "witness": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "otherName": {
+                    "type": "string"
+                  },
+                  "dateOfBirth": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "gender": {
+                    "type": "string",
+                    "enum": [
+                      "male",
+                      "female",
+                      "other"
+                    ]
+                  },
+                  "nationality": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "occupation": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "witnessSignature": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ]
+          },
+          "document": {
+            "type": "string"
+          }
+        }
+      },
+      "Subscription": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "free",
+              "sme",
+              "growth"
+            ],
+            "example": "sme"
+          },
+          "price": {
+            "type": "number",
+            "example": 30
+          },
+          "description": {
+            "type": "string",
+            "example": "Small business tier"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive"
+            ],
+            "example": "active"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "monthly",
+              "yearly"
+            ],
+            "example": "monthly"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-01-01T12:00:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-01-01T12:00:00Z"
+          }
+        },
+        "required": [
+          "name",
+          "price",
+          "description"
+        ]
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "phone": {
+            "type": "string",
+            "example": 1234567890
+          },
+          "email": {
+            "type": "string",
+            "example": "john.doe@example.com"
+          },
+          "hasPasscode": {
+            "type": "boolean",
+            "example": false
+          },
+          "password": {
+            "type": "string",
+            "example": "hashedpassword"
+          },
+          "passcode": {
+            "type": "string",
+            "example": 1234
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "user"
+            ],
+            "example": "user"
+          },
+          "debt": {
+            "type": "number",
+            "example": 0
+          },
+          "plan": {
+            "type": "string",
+            "enum": [
+              "free",
+              "sme",
+              "growth"
+            ],
+            "example": "sme"
+          },
+          "subscriptionId": {
+            "type": "string",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "subscriptionStatus": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive"
+            ],
+            "example": "active"
+          },
+          "subscriptionStartDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-01-01T12:00:00Z"
+          },
+          "subscriptionEndDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-01-31T12:00:00Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-01-01T12:00:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-01-01T12:00:00Z"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "phone",
+          "email",
+          "password"
+        ]
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "The unique identifier of the transaction"
+          },
+          "walletId": {
+            "type": "string",
+            "description": "The ID of the associated wallet"
+          },
+          "txId": {
+            "type": "string",
+            "description": "The transaction ID"
+          },
+          "txRef": {
+            "type": "string",
+            "description": "The transaction reference"
+          },
+          "amount": {
+            "type": "number",
+            "description": "The transaction amount"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The currency of the transaction"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of transaction (e.g., payment)"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the transaction (e.g., successful)"
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "object",
+                "properties": {
+                  "senderDetails": {
+                    "type": "string",
+                    "description": "Details of the sender"
+                  },
+                  "receiverDetails": {
+                    "type": "string",
+                    "description": "Details of the receiver"
+                  },
+                  "weight": {
+                    "type": "string",
+                    "description": "Weight of the package"
+                  },
+                  "packageContents": {
+                    "type": "string",
+                    "description": "Contents of the package"
+                  },
+                  "packageValue": {
+                    "type": "number",
+                    "description": "Value of the package"
+                  },
+                  "paymentMethod": {
+                    "type": "string",
+                    "description": "The payment method used"
+                  },
+                  "paymentMethodId": {
+                    "type": "string",
+                    "description": "The ID of the payment method"
+                  }
+                }
+              }
+            }
+          },
+          "__v": {
+            "type": "number",
+            "description": "The version key"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The creation date of the transaction"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The last update date of the transaction"
+          }
+        },
+        "example": {
+          "_id": "67e168f7d16f71d134a2734d",
+          "walletId": "67dc21990a5c933c2d172b11",
+          "txId": "8036898652648575",
+          "txRef": "Coconut_1742574887985",
+          "amount": 1449,
+          "currency": "NGN",
+          "type": "payment",
+          "status": "successful",
+          "meta": {
+            "data": {
+              "senderDetails": "1B OLABODE STREET AJAO ESTATE LAGOS, Oshodi, Lagos, NG",
+              "receiverDetails": "1789 Davidson Ave #2B Bronx NY 10453, Bronx, New York, US",
+              "weight": "4.5",
+              "packageContents": "Male local fabricHead tie",
+              "packageValue": 60000,
+              "paymentMethod": "Coconut Wallet",
+              "paymentMethodId": "67dd952f38e9283eda92d04b"
+            }
+          },
+          "__v": 0,
+          "createdAt": "2025-03-24T14:15:19.926Z",
+          "updatedAt": "2025-03-24T14:15:19.926Z"
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "type": "integer",
+            "description": "The current page number"
+          },
+          "totalPages": {
+            "type": "integer",
+            "description": "The total number of pages"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The number of items per page"
+          },
+          "totalItems": {
+            "type": "integer",
+            "description": "The total number of items"
+          }
+        },
+        "example": {
+          "currentPage": 1,
+          "totalPages": 5,
+          "limit": 10,
+          "totalItems": 50
+        }
+      },
+      "CreateTransferRequest": {
+        "type": "object",
+        "required": [
+          "receiverAmount",
+          "transferMethod",
+          "receiverCurrency",
+          "transferReceiverType",
+          "receiverAccountNumber",
+          "receiverCountryCode",
+          "senderAmount",
+          "senderCurrency",
+          "businessId",
+          "walletId"
+        ],
+        "properties": {
+          "receiverAmount": {
+            "type": "number",
+            "description": "Amount to be received by the recipient",
+            "example": 100.5
+          },
+          "transferMethod": {
+            "type": "string",
+            "description": "Method of transfer (e.g., bank, crypto, wallet)",
+            "example": "bank"
+          },
+          "receiverCurrency": {
+            "type": "string",
+            "description": "Currency of the receiver's amount (e.g., USD, NGN, BTC)",
+            "example": "USD"
+          },
+          "transferReceiverType": {
+            "type": "string",
+            "description": "Type of receiver account (e.g., bank, crypto_wallet)",
+            "example": "bank"
+          },
+          "receiverAccountNumber": {
+            "type": "string",
+            "description": "Receiver's account number or wallet address",
+            "example": "1234567890"
+          },
+          "receiverCountryCode": {
+            "type": "string",
+            "description": "ISO country code of the receiver (e.g., US, NG)",
+            "example": "US"
+          },
+          "receiverAccountName": {
+            "type": "string",
+            "description": "Name of the receiver's account",
+            "example": "John Doe"
+          },
+          "receiverSortCode": {
+            "type": "string",
+            "description": "Sort code for bank transfers",
+            "example": "01-02-03"
+          },
+          "senderAmount": {
+            "type": "number",
+            "description": "Amount sent by the sender",
+            "example": 102
+          },
+          "senderCurrency": {
+            "type": "string",
+            "description": "Currency of the sender's amount (e.g., USD, NGN)",
+            "example": "USD"
+          },
+          "businessId": {
+            "type": "string",
+            "description": "ID of the business initiating the transfer",
+            "example": "biz_123"
+          },
+          "meta": {
+            "type": "object",
+            "description": "Additional metadata for the transfer",
+            "example": {
+              "note": "Payment for services"
+            }
+          },
+          "walletId": {
+            "type": "string",
+            "description": "ID of the wallet used for the transfer",
+            "example": "wallet_456"
+          }
+        }
+      },
+      "TransferResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indicates if the transfer was initiated successfully",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message",
+            "example": "Transfer initiated successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "transferId": {
+                "type": "string",
+                "description": "Unique identifier for the transfer",
+                "example": "tx_789"
+              },
+              "status": {
+                "type": "string",
+                "description": "Current status of the transfer",
+                "example": "pending"
+              }
+            }
+          }
+        }
+      },
+      "Wallet": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Wallet ID"
+          },
+          "businessId": {
+            "type": "string",
+            "description": "ID of the business who owns the wallet"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email linked to the wallet"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the wallet owner"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the wallet owner"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency of the wallet"
+          },
+          "balance": {
+            "type": "number",
+            "description": "Current balance of the wallet"
+          },
+          "accountNumber": {
+            "type": "number",
+            "description": "Account Number of the wallet"
+          },
+          "bankName": {
+            "type": "string",
+            "description": "Name of the bank of the wallet"
+          },
+          "flwRef": {
+            "type": "string",
+            "description": "The forward ref of the wallet"
+          },
+          "orderRef": {
+            "type": "string",
+            "description": "The order ref of the wallet"
+          },
+          "narration": {
+            "type": "string",
+            "description": "The narration of the wallet and identification"
+          },
+          "accountStatus": {
+            "type": "string",
+            "description": "The current status of the wallet"
+          }
+        }
+      },
+      "CreateWalletRequest": {
+        "type": "object",
+        "required": [
+          "businessId",
+          "currency",
+          "email",
+          "phoneNumber",
+          "firstName",
+          "lastName",
+          "narration",
+          "bvn"
+        ],
+        "properties": {
+          "businessId": {
+            "type": "string",
+            "example": "67c8143b81fe647418a04f21",
+            "description": "ID of the user"
+          },
+          "email": {
+            "type": "string",
+            "example": "sasuke.uchiha@mailinator.com",
+            "description": "ID of the user"
+          },
+          "phoneNumber": {
+            "type": "number",
+            "example": "08134899761",
+            "description": "ID of the user"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "Sasuke",
+            "description": "ID of the user"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Uchiha",
+            "description": "ID of the user"
+          },
+          "currency": {
+            "type": "string",
+            "example": "NGN",
+            "description": "Currency of the wallet"
+          },
+          "narration": {
+            "type": "string",
+            "example": "Business Name",
+            "description": "ID of the user"
+          },
+          "bvn": {
+            "type": "string",
+            "example": "12345678901",
+            "description": "ID of the user"
+          }
+        }
+      },
+      "ProcessPaymentRequest": {
+        "type": "object",
+        "required": [
+          "walletId",
+          "amount",
+          "service",
+          "meta"
+        ],
+        "properties": {
+          "walletId": {
+            "type": "string",
+            "description": "ID of the wallet to debit"
+          },
+          "amount": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0.01
+            }
+          },
+          "service": {
+            "type": "string",
+            "description": "Type of service to pay for"
+          },
+          "meta": {
+            "type": "object",
+            "description": "Extra information with the payment"
+          }
+        }
+      },
+      "TransferToWalletRequest": {
+        "type": "object",
+        "required": [
+          "toWalletId",
+          "amount"
+        ],
+        "properties": {
+          "account number": {
+            "type": "string",
+            "description": "ID of the receiver's wallet"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Amount to transfer"
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional transaction description"
+          }
+        }
+      },
+      "TransferToBankRequest": {
+        "type": "object",
+        "required": [
+          "recipientAccountBank",
+          "recipientAccountNumber",
+          "amount",
+          "narration"
+        ],
+        "properties": {
+          "recipientAccountBank": {
+            "type": "string",
+            "description": "Bank of the recipient"
+          },
+          "recipientAccountNumber": {
+            "type": "string",
+            "description": "Account number of recipient"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Amount to transfer"
+          },
+          "narration": {
+            "type": "string",
+            "description": "Optional transaction description"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/api/v1/access-requests": {
+      "post": {
+        "summary": "Submit a new access request",
+        "tags": [
+          "AccessRequest"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Access request created successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all access requests (Admin only)",
+        "tags": [
+          "AccessRequest"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of access requests"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden (Admin only)"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/v1/address": {
+      "post": {
+        "summary": "Create a new address",
+        "description": "Create a pickup or destination address",
+        "tags": [
+          "Address"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "businessId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Reference to the Business model"
+                  },
+                  "firstName": {
+                    "type": "string",
+                    "description": "First name of the contact person"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "description": "Last name of the contact person"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Email address of the contact person"
+                  },
+                  "address1": {
+                    "type": "string",
+                    "description": "Primary address line"
+                  },
+                  "address2": {
+                    "type": "string",
+                    "description": "Secondary address line (optional)"
+                  },
+                  "country": {
+                    "type": "string",
+                    "description": "Country of the address"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "State of the address"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "City of the address"
+                  },
+                  "postalCode": {
+                    "type": "string",
+                    "description": "Postal code of the address"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "Contact phone number"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "pickup",
+                      "delivery"
+                    ],
+                    "description": "Type of address (pickup or delivery)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Address created successfully"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/address/{businessId}": {
+      "get": {
+        "summary": "Get all addresses for a specific business",
+        "description": "Retrieve all addresses associated with a specific business by its businessId.",
+        "tags": [
+          "Address"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the business whose addresses are being fetched."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved business addresses.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Business addresses retrieved successfully"
+                    },
+                    "addresses": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "65a8f2e7c4e7c6d0b23a3e19"
+                          },
+                          "businessId": {
+                            "type": "string",
+                            "example": "609c1f77bcf86cd799439011"
+                          },
+                          "firstName": {
+                            "type": "string",
+                            "example": "John"
+                          },
+                          "lastName": {
+                            "type": "string",
+                            "example": "Doe"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "johndoe@example.com"
+                          },
+                          "address1": {
+                            "type": "string",
+                            "example": "123 Business St"
+                          },
+                          "city": {
+                            "type": "string",
+                            "example": "New York"
+                          },
+                          "state": {
+                            "type": "string",
+                            "example": "NY"
+                          },
+                          "postalCode": {
+                            "type": "string",
+                            "example": "10001"
+                          },
+                          "country": {
+                            "type": "string",
+                            "example": "USA"
+                          },
+                          "phoneNumber": {
+                            "type": "string",
+                            "example": "+1234567890"
+                          },
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "pickup",
+                              "delivery"
+                            ],
+                            "example": "pickup"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid businessId provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid businessId format"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/api/v1/admin/create": {
+      "post": {
+        "summary": "Register a new admin",
+        "description": "Creates a new admin account with the specified details.",
+        "tags": [
+          "Admins"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminRegisterRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Admin registered successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminRegisterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse",
+                  "example": {
+                    "statusCode": 400,
+                    "message": "Invalid input"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Email already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse",
+                  "example": {
+                    "statusCode": 409,
+                    "message": "Email already exists"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse",
+                  "example": {
+                    "statusCode": 500,
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/login": {
+      "post": {
+        "summary": "Admin login",
+        "description": "Authenticates an admin and returns a JWT token.",
+        "tags": [
+          "Admins"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminLoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminLoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse",
+                  "example": {
+                    "statusCode": 400,
+                    "message": "Invalid input"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse",
+                  "example": {
+                    "statusCode": 401,
+                    "message": "Invalid email or password"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse",
+                  "example": {
+                    "statusCode": 500,
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/fetch-admin": {
+      "get": {
+        "summary": "Fetch list of admins",
+        "description": "Retrieves a list of all admin accounts.",
+        "tags": [
+          "Admins"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Admins retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminListResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse",
+                  "example": {
+                    "statusCode": 401,
+                    "message": "Unauthorized"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse",
+                  "example": {
+                    "statusCode": 500,
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "summary": "Register a new user",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Registration successful"
+          },
+          "400": {
+            "description": "User already exists or invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "summary": "User login",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful, returns JWT token"
+          },
+          "401": {
+            "description": "Invalid credentials"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/reset-password": {
+      "post": {
+        "summary": "Reset user password",
+        "description": "Resets the user's password using a valid reset token.",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password reset successful."
+          },
+          "400": {
+            "description": "Invalid or expired token."
+          },
+          "500": {
+            "description": "Server error."
+          }
+        }
+      }
+    },
+    "/api/v1/auth/users": {
+      "get": {
+        "summary": "Get all users",
+        "tags": [
+          "Authentication"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all users"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/business": {
+      "post": {
+        "summary": "Register a new business",
+        "description": "Allows a user to register a business with a name, logo, category, and type.",
+        "tags": [
+          "Business"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterBusiness"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Business registered successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all businesses belonging to a user",
+        "description": "Retrieves all businesses associated with the authenticated user.",
+        "tags": [
+          "Business"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Businesses retrieved successfully"
+          },
+          "400": {
+            "description": "User ID is required"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/v1/business/{businessId}": {
+      "put": {
+        "summary": "Update a business",
+        "description": "Allows a user to update business details like name, logo, category, or type.",
+        "tags": [
+          "Business"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "67b1f4e391234ec346b065fb",
+            "description": "The ID of the business to update (MongoDB ObjectId)"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBusiness"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Business updated successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "404": {
+            "description": "Business not found"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get business details",
+        "description": "Retrieves details of a specific business by its ID.",
+        "tags": [
+          "Business"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "67b1f4e391234ec346b065fb",
+            "description": "The ID of the business (MongoDB ObjectId)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Business retrieved successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "404": {
+            "description": "Business not found"
+          }
+        }
+      }
+    },
+    "/api/v1/check/auth-status": {
+      "get": {
+        "summary": "Validate the authentication token",
+        "tags": [
+          "Checks"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "description": "Checks if the provided authentication token is valid.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Bearer <your-token-here>"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token is valid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Token is valid"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "username": {
+                          "type": "string",
+                          "example": "user123"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token provided"
+          },
+          "403": {
+            "description": "Invalid or expired token"
+          }
+        }
+      }
+    },
+    "/api/v1/check/health": {
+      "get": {
+        "summary": "Check if the service is live",
+        "tags": [
+          "Checks"
+        ],
+        "description": "This endpoint checks if the backend service is up and running.",
+        "responses": {
+          "200": {
+            "description": "Service is live",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Service is live"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/filling/create": {
+      "post": {
+        "summary": "Create a new filling registration",
+        "description": "Register a new business with its details, director, and witness",
+        "tags": [
+          "Registrations"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "businessId",
+                  "details",
+                  "txId",
+                  "status",
+                  "document"
+                ],
+                "properties": {
+                  "businessId": {
+                    "type": "string",
+                    "description": "The unique identifier for the business"
+                  },
+                  "details": {
+                    "type": "object",
+                    "required": [
+                      "businessNames",
+                      "director",
+                      "witness"
+                    ],
+                    "properties": {
+                      "businessNames": {
+                        "type": "object",
+                        "required": [
+                          "type",
+                          "name1",
+                          "phone",
+                          "email",
+                          "businessNature"
+                        ],
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "description": "The type of business entity"
+                          },
+                          "name1": {
+                            "type": "string",
+                            "description": "The primary business name"
+                          },
+                          "name2": {
+                            "type": "string",
+                            "description": "The secondary business name (optional)"
+                          },
+                          "name3": {
+                            "type": "string",
+                            "description": "The tertiary business name (optional)"
+                          },
+                          "phone": {
+                            "type": "string",
+                            "description": "The business phone number"
+                          },
+                          "email": {
+                            "type": "string",
+                            "description": "The business email"
+                          },
+                          "businessNature": {
+                            "type": "string",
+                            "description": "The nature of the business"
+                          }
+                        }
+                      },
+                      "director": {
+                        "type": "object",
+                        "required": [
+                          "firstName",
+                          "lastName",
+                          "dateOfBirth",
+                          "gender",
+                          "nationality",
+                          "phone",
+                          "email",
+                          "occupation",
+                          "address",
+                          "nin",
+                          "identification",
+                          "passport",
+                          "signature"
+                        ],
+                        "properties": {
+                          "firstName": {
+                            "type": "string",
+                            "description": "The director's first name"
+                          },
+                          "lastName": {
+                            "type": "string",
+                            "description": "The director's last name"
+                          },
+                          "otherName": {
+                            "type": "string",
+                            "description": "The director's other name (optional)"
+                          },
+                          "dateOfBirth": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The director's date of birth"
+                          },
+                          "gender": {
+                            "type": "string",
+                            "enum": [
+                              "male",
+                              "female",
+                              "other"
+                            ],
+                            "description": "The director's gender"
+                          },
+                          "nationality": {
+                            "type": "string",
+                            "description": "The director's nationality"
+                          },
+                          "phone": {
+                            "type": "string",
+                            "description": "The director's phone number"
+                          },
+                          "email": {
+                            "type": "string",
+                            "description": "The director's email"
+                          },
+                          "occupation": {
+                            "type": "string",
+                            "description": "The director's occupation"
+                          },
+                          "address": {
+                            "type": "string",
+                            "description": "The director's address"
+                          },
+                          "nin": {
+                            "type": "string",
+                            "description": "The director's National Identification Number"
+                          },
+                          "identification": {
+                            "type": "string",
+                            "description": "The director's identification document"
+                          },
+                          "passport": {
+                            "type": "string",
+                            "description": "The director's passport number or file"
+                          },
+                          "signature": {
+                            "type": "string",
+                            "description": "The director's signature file"
+                          }
+                        }
+                      },
+                      "witness": {
+                        "type": "object",
+                        "required": [
+                          "firstName",
+                          "lastName",
+                          "dateOfBirth",
+                          "gender",
+                          "nationality",
+                          "phone",
+                          "email",
+                          "occupation",
+                          "address"
+                        ],
+                        "properties": {
+                          "firstName": {
+                            "type": "string",
+                            "description": "The witness's first name"
+                          },
+                          "lastName": {
+                            "type": "string",
+                            "description": "The witness's last name"
+                          },
+                          "otherName": {
+                            "type": "string",
+                            "description": "The witness's other name (optional)"
+                          },
+                          "dateOfBirth": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The witness's date of birth"
+                          },
+                          "gender": {
+                            "type": "string",
+                            "enum": [
+                              "male",
+                              "female",
+                              "other"
+                            ],
+                            "description": "The witness's gender"
+                          },
+                          "nationality": {
+                            "type": "string",
+                            "description": "The witness's nationality"
+                          },
+                          "phone": {
+                            "type": "string",
+                            "description": "The witness's phone number"
+                          },
+                          "email": {
+                            "type": "string",
+                            "description": "The witness's email"
+                          },
+                          "occupation": {
+                            "type": "string",
+                            "description": "The witness's occupation"
+                          },
+                          "address": {
+                            "type": "string",
+                            "description": "The witness's address"
+                          },
+                          "witnessSignature": {
+                            "type": "string",
+                            "description": "The witness's signature file (optional)"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "txId": {
+                    "type": "string",
+                    "description": "The transaction ID"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pending",
+                      "approved",
+                      "rejected"
+                    ],
+                    "description": "The registration status"
+                  },
+                  "document": {
+                    "type": "string",
+                    "description": "The registration document file"
+                  }
+                },
+                "example": {
+                  "businessId": "12345",
+                  "details": {
+                    "businessNames": {
+                      "type": "LLC",
+                      "name1": "Acme Corp",
+                      "name2": "Acme LLC",
+                      "phone": "+2348012345678",
+                      "email": "contact@acme.com",
+                      "businessNature": "Technology"
+                    },
+                    "director": {
+                      "firstName": "John",
+                      "lastName": "Doe",
+                      "dateOfBirth": "1990-01-01T00:00:00Z",
+                      "gender": "male",
+                      "nationality": "Nigerian",
+                      "phone": "+2348012345678",
+                      "email": "john.doe@example.com",
+                      "occupation": "Engineer",
+                      "address": "123 Main St, Lagos",
+                      "nin": "123456789",
+                      "identification": "ID123",
+                      "passport": "passport.jpg",
+                      "signature": "signature.jpg"
+                    },
+                    "witness": {
+                      "firstName": "Jane",
+                      "lastName": "Smith",
+                      "dateOfBirth": "1992-02-02T00:00:00Z",
+                      "gender": "female",
+                      "nationality": "Nigerian",
+                      "phone": "+2349012345678",
+                      "email": "jane.smith@example.com",
+                      "occupation": "Lawyer",
+                      "address": "456 High St, Lagos"
+                    }
+                  },
+                  "txId": "tx123",
+                  "status": "pending",
+                  "document": "document.pdf"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Registration created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/paths/~1api~1v1~1registrations~1post~1requestBody~1content~1application~1json~1schema"
+                    }
+                  },
+                  "example": {
+                    "success": true,
+                    "message": "Registration created successfully",
+                    "data": {
+                      "businessId": "12345",
+                      "details": {
+                        "businessNames": {
+                          "type": "LLC",
+                          "name1": "Acme Corp",
+                          "name2": "Acme LLC",
+                          "phone": "+2348012345678",
+                          "email": "contact@acme.com",
+                          "businessNature": "Technology"
+                        },
+                        "director": {
+                          "firstName": "John",
+                          "lastName": "Doe",
+                          "dateOfBirth": "1990-01-01T00:00:00Z",
+                          "gender": "male",
+                          "nationality": "Nigerian",
+                          "phone": "+2348012345678",
+                          "email": "john.doe@example.com",
+                          "occupation": "Engineer",
+                          "address": "123 Main St, Lagos",
+                          "nin": "123456789",
+                          "identification": "ID123",
+                          "passport": "passport.jpg",
+                          "signature": "signature.jpg"
+                        },
+                        "witness": {
+                          "firstName": "Jane",
+                          "lastName": "Smith",
+                          "dateOfBirth": "1992-02-02T00:00:00Z",
+                          "gender": "female",
+                          "nationality": "Nigerian",
+                          "phone": "+2349012345678",
+                          "email": "jane.smith@example.com",
+                          "occupation": "Lawyer",
+                          "address": "456 High St, Lagos"
+                        }
+                      },
+                      "txId": "tx123",
+                      "status": "pending",
+                      "document": "document.pdf",
+                      "createdAt": "2025-05-27T14:22:00Z",
+                      "updatedAt": "2025-05-27T14:22:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (validation error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "success": false,
+                    "message": "Validation error: Type is required, Email is required"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "success": false,
+                    "message": "Unauthorized"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "success": false,
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/filling/{businessId}": {
+      "get": {
+        "summary": "Fetch registration forms by business ID",
+        "tags": [
+          "Registrations"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the business"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registration forms fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Registration forms fetched successfully"
+                    },
+                    "forms": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RegistrationForm"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No registration forms found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/v1/filling": {
+      "get": {
+        "summary": "Fetch all filling registration forms",
+        "tags": [
+          "Registrations"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registration forms fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Registration forms fetched successfully"
+                    },
+                    "forms": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RegistrationForm"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No registration forms found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/v1/filling/{id}": {
+      "patch": {
+        "summary": "Update a filling registration form by ID",
+        "tags": [
+          "Registrations"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the registration form"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRegistrationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Registration form updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Registration form updated successfully"
+                    },
+                    "form": {
+                      "$ref": "#/components/schemas/RegistrationForm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Registration form not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/v1/otp/send-otp": {
+      "post": {
+        "summary": "Send OTP for phone and email verification",
+        "tags": [
+          "OTP"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "user@example.com"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "+1234567890"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OTP sent successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/otp/verify-otp": {
+      "post": {
+        "summary": "Verify OTP for authentication",
+        "tags": [
+          "OTP"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "user@example.com"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "+1234567890"
+                  },
+                  "otp": {
+                    "type": "string",
+                    "example": "123456"
+                  },
+                  "bvn": {
+                    "type": "string",
+                    "example": "12345678901"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OTP verified successfully"
+          },
+          "400": {
+            "description": "Invalid OTP or expired OTP"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/passcode/set": {
+      "post": {
+        "summary": "Set a 6-digit passcode",
+        "description": "Allows an authenticated user to set a 6-digit passcode for additional security.",
+        "tags": [
+          "Passcode"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "passcode"
+                ],
+                "properties": {
+                  "passcode": {
+                    "type": "string",
+                    "example": "123456",
+                    "description": "A 6-digit numeric passcode"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Passcode set successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Passcode set successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request (e.g., missing or invalid passcode)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid or missing token)"
+          }
+        }
+      }
+    },
+    "/api/v1/passcode/verify": {
+      "post": {
+        "summary": "Verify a 6-digit passcode",
+        "description": "Allows an authenticated user to verify their passcode.",
+        "tags": [
+          "Passcode"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "passcode"
+                ],
+                "properties": {
+                  "passcode": {
+                    "type": "string",
+                    "example": "123456",
+                    "description": "The 6-digit numeric passcode to verify"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Passcode verified successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Passcode verified successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid passcode or request"
+          },
+          "401": {
+            "description": "Unauthorized (invalid or missing token)"
+          }
+        }
+      }
+    },
+    "/api/v1/shipment": {
+      "post": {
+        "summary": "Create a new shipment",
+        "tags": [
+          "Shipment"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "businessId",
+                  "sender",
+                  "receiver",
+                  "shipmentId",
+                  "trackingNumber",
+                  "waybillUrl",
+                  "packages"
+                ],
+                "properties": {
+                  "businessId": {
+                    "type": "string",
+                    "example": "6600317e4bc181fdbe12c6c4"
+                  },
+                  "sender": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                      },
+                      "address_1": {
+                        "type": "string",
+                        "example": "123 Main St"
+                      },
+                      "address_2": {
+                        "type": "string",
+                        "example": "Apt 4B"
+                      },
+                      "city": {
+                        "type": "string",
+                        "example": "New York"
+                      },
+                      "state": {
+                        "type": "string",
+                        "example": "NY"
+                      },
+                      "country": {
+                        "type": "string",
+                        "example": "USA"
+                      },
+                      "postcode": {
+                        "type": "string",
+                        "example": "10001"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "john@example.com"
+                      },
+                      "phone_no": {
+                        "type": "string",
+                        "example": "+1-555-123-4567"
+                      }
+                    }
+                  },
+                  "receiver": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "Jane Smith"
+                      },
+                      "address_1": {
+                        "type": "string",
+                        "example": "456 Elm St"
+                      },
+                      "address_2": {
+                        "type": "string",
+                        "example": "Suite 12"
+                      },
+                      "city": {
+                        "type": "string",
+                        "example": "San Francisco"
+                      },
+                      "state": {
+                        "type": "string",
+                        "example": "CA"
+                      },
+                      "country": {
+                        "type": "string",
+                        "example": "USA"
+                      },
+                      "postcode": {
+                        "type": "string",
+                        "example": "94101"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "jane@example.com"
+                      },
+                      "phone_no": {
+                        "type": "string",
+                        "example": "+1-555-987-6543"
+                      }
+                    }
+                  },
+                  "shipmentId": {
+                    "type": "string",
+                    "example": "SHIP-202503201"
+                  },
+                  "trackingNumber": {
+                    "type": "string",
+                    "example": "TRK202503201"
+                  },
+                  "waybillUrl": {
+                    "type": "string",
+                    "format": "url",
+                    "example": "https://example.com/waybill.pdf"
+                  },
+                  "packages": {
+                    "type": "object",
+                    "example": {
+                      "weight": "5kg",
+                      "dimensions": "10x10x10",
+                      "fragile": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Shipment created successfully"
+          },
+          "400": {
+            "description": "Bad request or validation error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all shipments",
+        "tags": [
+          "Shipment"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of shipments"
+          }
+        }
+      }
+    },
+    "/api/v1/shipment/version1": {
+      "post": {
+        "summary": "Create a new shipment (Version 1)",
+        "tags": [
+          "Shipment"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "sender",
+                  "receiver",
+                  "booking",
+                  "package"
+                ],
+                "properties": {
+                  "sender": {
+                    "type": "object",
+                    "required": [
+                      "name",
+                      "address_1",
+                      "city",
+                      "state",
+                      "country",
+                      "postcode",
+                      "email",
+                      "phone_no"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                      },
+                      "address_1": {
+                        "type": "string",
+                        "example": "123 Main St"
+                      },
+                      "address_2": {
+                        "type": "string",
+                        "example": "Apt 4B"
+                      },
+                      "city": {
+                        "type": "string",
+                        "example": "New York"
+                      },
+                      "state": {
+                        "type": "string",
+                        "example": "NY"
+                      },
+                      "country": {
+                        "type": "string",
+                        "example": "USA"
+                      },
+                      "postcode": {
+                        "type": "string",
+                        "example": "10001"
+                      },
+                      "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "john@example.com"
+                      },
+                      "phone_no": {
+                        "type": "string",
+                        "example": "+1-555-123-4567"
+                      }
+                    }
+                  },
+                  "receiver": {
+                    "type": "object",
+                    "required": [
+                      "name",
+                      "address_1",
+                      "city",
+                      "state",
+                      "country",
+                      "postcode",
+                      "email",
+                      "phone_no"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "Jane Smith"
+                      },
+                      "address_1": {
+                        "type": "string",
+                        "example": "456 Elm St"
+                      },
+                      "address_2": {
+                        "type": "string",
+                        "example": "Suite 12"
+                      },
+                      "city": {
+                        "type": "string",
+                        "example": "San Francisco"
+                      },
+                      "state": {
+                        "type": "string",
+                        "example": "CA"
+                      },
+                      "country": {
+                        "type": "string",
+                        "example": "USA"
+                      },
+                      "postcode": {
+                        "type": "string",
+                        "example": "94101"
+                      },
+                      "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "jane@example.com"
+                      },
+                      "phone_no": {
+                        "type": "string",
+                        "example": "+1-555-987-6543"
+                      }
+                    }
+                  },
+                  "booking": {
+                    "type": "object",
+                    "required": [
+                      "shipment_type",
+                      "shipping_date",
+                      "processing_station_id",
+                      "currency",
+                      "insurance",
+                      "pickup"
+                    ],
+                    "properties": {
+                      "shipment_type": {
+                        "type": "string",
+                        "example": "express"
+                      },
+                      "shipping_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-05-01"
+                      },
+                      "carrier_id": {
+                        "type": "string",
+                        "example": "carrier123"
+                      },
+                      "processing_station_id": {
+                        "type": "string",
+                        "example": "stationA"
+                      },
+                      "currency": {
+                        "type": "string",
+                        "example": "USD"
+                      },
+                      "insurance": {
+                        "type": "object",
+                        "properties": {
+                          "request_insurance": {
+                            "type": "string",
+                            "example": "yes"
+                          },
+                          "insurance_type": {
+                            "type": "string",
+                            "example": "standard"
+                          },
+                          "insurance_fee": {
+                            "type": "number",
+                            "example": 25.5
+                          }
+                        }
+                      },
+                      "pickup": {
+                        "type": "object",
+                        "properties": {
+                          "request_pickup": {
+                            "type": "string",
+                            "example": "yes"
+                          },
+                          "pickup_type_id": {
+                            "type": "string",
+                            "example": "pickup123"
+                          },
+                          "pickup_fee": {
+                            "type": "number",
+                            "example": 10
+                          }
+                        }
+                      },
+                      "fees": {
+                        "type": "object",
+                        "properties": {
+                          "standard_fee": {
+                            "type": "string",
+                            "example": "15.00"
+                          },
+                          "services_fee": {
+                            "type": "number",
+                            "example": 5
+                          },
+                          "extras_fee": {
+                            "type": "number",
+                            "example": 2.5
+                          },
+                          "shipping_fee": {
+                            "type": "string",
+                            "example": "25.00"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "package": {
+                    "type": "object",
+                    "required": [
+                      "package_type",
+                      "package_image_url",
+                      "packages"
+                    ],
+                    "properties": {
+                      "package_type": {
+                        "type": "string",
+                        "example": "box"
+                      },
+                      "package_image_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "https://example.com/image.jpg"
+                      },
+                      "packages": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "number_of_items",
+                            "package_value",
+                            "package_weight",
+                            "package_length",
+                            "package_width",
+                            "package_height",
+                            "description",
+                            "package_items"
+                          ],
+                          "properties": {
+                            "number_of_items": {
+                              "type": "number",
+                              "example": 2
+                            },
+                            "package_value": {
+                              "type": "number",
+                              "example": 500
+                            },
+                            "package_weight": {
+                              "type": "number",
+                              "example": 10
+                            },
+                            "package_length": {
+                              "type": "string",
+                              "example": "40"
+                            },
+                            "package_width": {
+                              "type": "string",
+                              "example": "30"
+                            },
+                            "package_height": {
+                              "type": "string",
+                              "example": "20"
+                            },
+                            "description": {
+                              "type": "string",
+                              "example": "Electronics"
+                            },
+                            "package_items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "required": [
+                                  "category",
+                                  "name",
+                                  "description",
+                                  "weight",
+                                  "quantity",
+                                  "value",
+                                  "value_currency",
+                                  "hs_code",
+                                  "image_url"
+                                ],
+                                "properties": {
+                                  "category": {
+                                    "type": "string",
+                                    "example": "Gadgets"
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "example": "Phone"
+                                  },
+                                  "description": {
+                                    "type": "string",
+                                    "example": "Smartphone"
+                                  },
+                                  "weight": {
+                                    "type": "string",
+                                    "example": "0.5"
+                                  },
+                                  "quantity": {
+                                    "type": "string",
+                                    "example": "2"
+                                  },
+                                  "value": {
+                                    "type": "string",
+                                    "example": "250"
+                                  },
+                                  "value_currency": {
+                                    "type": "string",
+                                    "example": "USD"
+                                  },
+                                  "hs_code": {
+                                    "type": "string",
+                                    "example": "85171200"
+                                  },
+                                  "image_url": {
+                                    "type": "string",
+                                    "format": "url",
+                                    "example": "https://example.com/item.jpg"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Shipment created successfully"
+          },
+          "400": {
+            "description": "Bad request or validation error"
+          }
+        }
+      }
+    },
+    "/api/v1/shipment/{businessId}": {
+      "get": {
+        "summary": "Get all shipments for a specific business",
+        "tags": [
+          "Shipment"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID of the business"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of shipments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Shipment"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/shipment/{shipmentId}": {
+      "get": {
+        "summary": "Get a shipment by ID",
+        "tags": [
+          "Shipment"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shipmentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Shipment ID (MongoDB ObjectId)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Shipment details"
+          },
+          "404": {
+            "description": "Shipment not found"
+          }
+        }
+      }
+    },
+    "/api/v1/shipping/parcels": {
+      "post": {
+        "summary": "Create a new parcel",
+        "description": "Create a parcel for all your items",
+        "tags": [
+          "Shipping"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Parcel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Parcel created successfully"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/shipping/shipping-rates": {
+      "post": {
+        "summary": "Get shipping rates",
+        "description": "Get shipping rate",
+        "tags": [
+          "Shipping"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShippingRateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Shipping rates fetched successfully"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "api/v1/subscriptions/create": {
+      "post": {
+        "summary": "Create a new subscription plan (Admin only)",
+        "tags": [
+          "Subscription"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "enum": [
+                      "free",
+                      "sme",
+                      "growth"
+                    ],
+                    "example": "sme"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 30
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Small business tier"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "monthly",
+                      "yearly"
+                    ],
+                    "example": "monthly"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Subscription plan created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Subscription plan created successfully"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Subscription"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error creating subscription plan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error creating subscription plan"
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid plan name"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "api/v1/subscriptions/plans": {
+      "get": {
+        "summary": "Get all available subscription plans",
+        "tags": [
+          "Subscription"
+        ],
+        "responses": {
+          "200": {
+            "description": "Plans fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Plans fetched successfully"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Subscription"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error fetching plans",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error fetching plans"
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "api/v1/subscriptions/upgrade": {
+      "post": {
+        "summary": "Upgrade a user's subscription plan",
+        "tags": [
+          "Subscription"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nextPlan": {
+                    "type": "string",
+                    "enum": [
+                      "sme",
+                      "growth"
+                    ],
+                    "example": "growth"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Plan upgraded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Plan upgraded successfully"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/User"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error upgrading plan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error upgrading plan"
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid plan"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "api/v1/subscriptions/downgrade": {
+      "post": {
+        "summary": "Downgrade a user's subscription plan",
+        "tags": [
+          "Subscription"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nextPlan": {
+                    "type": "string",
+                    "enum": [
+                      "free",
+                      "sme"
+                    ],
+                    "example": "free"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Plan downgraded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Plan downgraded successfully"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/User"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error downgrading plan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error downgrading plan"
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid plan"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/upload": {
+      "post": {
+        "summary": "Upload a file to AWS S3",
+        "description": "Uploads a file to an S3 bucket and returns the file URL.",
+        "tags": [
+          "Upload"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "File uploaded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No file uploaded"
+          },
+          "500": {
+            "description": "File upload failed"
+          }
+        }
+      }
+    },
+    "/api/v1/wallets/data": {
+      "get": {
+        "summary": "Get all wallets of a user by admin",
+        "tags": [
+          "Wallet"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wallets retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Wallet"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wallets/transactions": {
+      "get": {
+        "summary": "Get all transactions with pagination",
+        "description": "Retrieve a paginated list of transactions for a user by an admin",
+        "tags": [
+          "Wallet",
+          "Transactions"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transactions retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "transactions": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Transaction"
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                },
+                "example": {
+                  "success": true,
+                  "transactions": [
+                    {
+                      "_id": "67e168f7d16f71d134a2734d",
+                      "walletId": "67dc21990a5c933c2d172b11",
+                      "txId": "8036898652648575",
+                      "txRef": "Coconut_1742574887985",
+                      "amount": 1449,
+                      "currency": "NGN",
+                      "type": "payment",
+                      "status": "successful",
+                      "meta": {
+                        "data": {
+                          "senderDetails": "1B OLABODE STREET AJAO ESTATE LAGOS, Oshodi, Lagos, NG",
+                          "receiverDetails": "1789 Davidson Ave #2B Bronx NY 10453, Bronx, New York, US",
+                          "weight": "4.5",
+                          "packageContents": "Male local fabricHead tie",
+                          "packageValue": 60000,
+                          "paymentMethod": "Coconut Wallet",
+                          "paymentMethodId": "67dd952f38e9283eda92d04b"
+                        }
+                      },
+                      "__v": 0,
+                      "createdAt": "2025-03-24T14:15:19.926Z",
+                      "updatedAt": "2025-03-24T14:15:19.926Z"
+                    }
+                  ],
+                  "pagination": {
+                    "currentPage": 1,
+                    "totalPages": 5,
+                    "limit": 10,
+                    "totalItems": 50
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "success": false,
+                  "message": "Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No transactions found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "success": false,
+                  "message": "No transactions found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "success": false,
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bani": {
+      "post": {
+        "summary": "Initiate Banni transfer",
+        "description": "Creates a new transfer request with details about the sender, receiver, and transaction.",
+        "tags": [
+          "Transfers"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTransferRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Transfer initiated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse",
+                  "example": {
+                    "statusCode": 400,
+                    "message": "Invalid input"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse",
+                  "example": {
+                    "statusCode": 401,
+                    "message": "Unauthorized"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse",
+                  "example": {
+                    "statusCode": 500,
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wallets": {
+      "post": {
+        "summary": "Create a new wallet for a user",
+        "tags": [
+          "Wallet"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWalletRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Wallet created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Wallet"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wallets/banks": {
+      "get": {
+        "summary": "Get a list of all banks from Flutterwave",
+        "tags": [
+          "Banks"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "countryCode",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Country code (default \"NG\" for Nigeria)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved bank details"
+          }
+        }
+      }
+    },
+    "/api/v1/wallets/{businessId}": {
+      "get": {
+        "summary": "Get all wallets of a user",
+        "tags": [
+          "Wallet"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "businessId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the business"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wallets retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Wallet"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wallets/verify": {
+      "get": {
+        "summary": "Verify a transaction",
+        "tags": [
+          "Wallet"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "transactionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the transaction to verify"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction verified successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "Transaction status"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wallets/balance/{walletId}": {
+      "get": {
+        "summary": "Get wallet balance",
+        "tags": [
+          "Wallet"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "walletId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the wallet"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Balance retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "balance": {
+                      "type": "number",
+                      "description": "Current wallet balance"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wallets/pay": {
+      "post": {
+        "summary": "Process payment for shipment",
+        "tags": [
+          "Wallet"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPaymentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Payment successful"
+          }
+        }
+      }
+    },
+    "/api/v1/wallets/transfer": {
+      "post": {
+        "summary": "Transfer funds between to customer bank",
+        "tags": [
+          "Wallet"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransferToBankRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transfer successful"
+          }
+        }
+      }
+    },
+    "/api/v1/wallets/update-bvn": {
+      "post": {
+        "summary": "Update BVN for a wallet",
+        "tags": [
+          "Wallet"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "walletId",
+                  "bvn"
+                ],
+                "properties": {
+                  "walletId": {
+                    "type": "string",
+                    "description": "The ID of the wallet"
+                  },
+                  "bvn": {
+                    "type": "string",
+                    "description": "The new BVN to update"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "BVN updated successfully"
+          },
+          "400": {
+            "description": "Bad request (missing or invalid data)"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/wallets/transactions/{walletId}": {
+      "get": {
+        "summary": "Get all transactions for a wallet",
+        "tags": [
+          "Wallet"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "walletId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the wallet"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transactions retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "amount": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AccessRequest",
+      "description": "API for managing access requests"
+    },
+    {
+      "name": "Address",
+      "description": "Shipping address management endpoints"
+    },
+    {
+      "name": "Business",
+      "description": "Business management endpoints"
+    },
+    {
+      "name": "Checks",
+      "description": "Run application checks endpoints"
+    },
+    {
+      "name": "OTP",
+      "description": "OTP verification endpoints"
+    },
+    {
+      "name": "Passcode",
+      "description": "User passcode management"
+    },
+    {
+      "name": "Shipment",
+      "description": "Shipment management endpoints"
+    },
+    {
+      "name": "Shipping",
+      "description": "Shipping management endpoints"
+    }
+  ]
+}
